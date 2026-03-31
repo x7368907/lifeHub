@@ -1,28 +1,27 @@
 version: "3.9"
 
 services:
-  postgres:
-    image: postgres:15
-    container_name: lifehub_postgres
+  mysql:
+    image: mysql:8.3
+    container_name: lifehub_mysql
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: lifehub
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: lifehub
     ports:
-      - "5432:5432"
+      - "3306:3306"
     volumes:
-      - lifehub_db:/var/lib/postgresql/data
+      - lifehub_db:/var/lib/mysql
 
   backend:
     build: ./backend
     container_name: lifehub_backend
     environment:
-      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/lifehub
+      DATABASE_URL: mysql+pymysql://root:password@mysql:3306/lifehub
       SECRET_KEY: change_me
     ports:
       - "8000:8000"
     depends_on:
-      - postgres
+      - mysql
 
 volumes:
   lifehub_db:

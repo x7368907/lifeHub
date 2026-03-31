@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: lifehub_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: lifehub
+    ports:
+      - "5432:5432"
+    volumes:
+      - lifehub_db:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: lifehub_backend
+    environment:
+      DATABASE_URL: postgresql+psycopg2://postgres:postgres@postgres:5432/lifehub
+      SECRET_KEY: change_me
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+volumes:
+  lifehub_db:

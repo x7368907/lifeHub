@@ -1,0 +1,32 @@
+# Python
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+**/.coverage
+**/htmlcov/
+**/.venv/
+**/venv/
+
+# Node / React Native / Expo
+**/node_modules/
+**/dist/
+**/build/
+**/.expo/
+**/.expo-shared/
+
+# Env & secrets
+**/.env
+**/.env.*
+
+# OS
+**/.DS_Store
+
+# Logs & DB
+**/*.log
+**/*.sqlite
+**/*.sqlite3
+**/*.db
